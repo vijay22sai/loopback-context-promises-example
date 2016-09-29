@@ -3,10 +3,14 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
+var LoopBackContext = require('loopback-context');
+
 var app = module.exports = loopback();
 
 app.use(function(req, res, next){
   console.log("my own middleware! - 1");
+  var ctx = LoopBackContext.getCurrentContext();
+  ctx.set('attr', (req.param("q")));
   next();
 });
 
